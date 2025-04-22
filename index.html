@@ -1,68 +1,77 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pembayaran Offline</title>
-    <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Struktur Pembayaran</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-    <header>
-        <h1>Pembayaran Produk</h1>
-    </header>
-    
-    <main>
-        <div class="form-container">
-            <h2>Form Pembayaran</h2>
-            <form id="paymentForm">
-                <label for="name">Nama:</label>
-                <input type="text" id="name" name="name" required>
-                
-                <label for="product">Produk:</label>
-                <input type="text" id="product" name="product" required>
-                
-                <label for="duration">Masa Produk (bulan):</label>
-                <input type="number" id="duration" name="duration" required>
-                
-                <label for="price">Harga (Rp):</label>
-                <input type="number" id="price" name="price" required>
-                
-                <label for="paymentMethod">Via Pembayaran:</label>
-                <select id="paymentMethod" name="paymentMethod" required>
-                    <option value="transfer">Transfer Bank</option>
-                    <option value="cash">Tunai</option>
-                    <option value="credit_card">Kartu Kredit</option>
-                </select>
-                
-                <button type="button" onclick="submitPayment()">Bayar</button>
-            </form>
-        </div>
-    </main>
+  <div class="container">
+    <h2>Form Struktur Pembayaran</h2>
+    <form id="paymentForm">
+      <input type="text" placeholder="Nama" id="nama" required />
+      <input type="text" placeholder="Produk" id="produk" required />
+      <input type="text" placeholder="Masa Produk (contoh: 12 Bulan)" id="masa" required />
+      <input type="number" placeholder="Harga (Rp)" id="harga" required />
+      <select id="via" required>
+        <option value="">Pilih Metode Pembayaran</option>
+        <option value="Transfer Bank">Transfer Bank</option>
+        <option value="QRIS">QRIS</option>
+        <option value="Tunai">Tunai</option>
+      </select>
+      <button type="submit">Tambah Data</button>
+    </form>
 
-    <footer>
-        <p>&copy; 2023 Pembayaran Offline. Semua hak dilindungi.</p>
-    </footer>
+    <table id="dataTable">
+      <thead>
+        <tr>
+          <th>Nama</th>
+          <th>Produk</th>
+          <th>Masa</th>
+          <th>Harga</th>
+          <th>Via</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+      <tfoot>
+        <tr>
+          <td colspan="3"></td>
+          <td colspan="2" id="totalHarga">Total: Rp 0</td>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
 
-    <script>
-        function submitPayment() {
-            const name = document.getElementById('name').value;
-            const product = document.getElementById('product').value;
-            const duration = document.getElementById('duration').value;
-            const price = document.getElementById('price').value;
-            const paymentMethod = document.getElementById('paymentMethod').value;
+  <script>
+    const form = document.getElementById('paymentForm');
+    const tableBody = document.querySelector('#dataTable tbody');
+    const totalHargaCell = document.getElementById('totalHarga');
+    let total = 0;
 
-            const total = price * duration;
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
 
-            // Simulasi pengalihan ke halaman ringkasan
-            localStorage.setItem('name', name);
-            localStorage.setItem('product', product);
-            localStorage.setItem('duration', duration);
-            localStorage.setItem('price', price);
-            localStorage.setItem('paymentMethod', paymentMethod);
-            localStorage.setItem('total', total);
-            window.location.href = 'summary.html';
-        }
-    </script>
+      const nama = document.getElementById('nama').value;
+      const produk = document.getElementById('produk').value;
+      const masa = document.getElementById('masa').value;
+      const harga = parseInt(document.getElementById('harga').value);
+      const via = document.getElementById('via').value;
+
+      const row = document.createElement('tr');
+      row.innerHTML = `
+        <td>${nama}</td>
+        <td>${produk}</td>
+        <td>${masa}</td>
+        <td>Rp ${harga.toLocaleString('id-ID')}</td>
+        <td>${via}</td>
+      `;
+
+      tableBody.appendChild(row);
+      total += harga;
+      totalHargaCell.textContent = 'Total: Rp ' + total.toLocaleString('id-ID');
+      form.reset();
+    });
+  </script>
 </body>
 </html>
