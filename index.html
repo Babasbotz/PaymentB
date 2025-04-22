@@ -3,57 +3,128 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Struktur Produk Online</title>
-  <link rel="stylesheet" href="style.css">
+  <title>Struktur Pembayaran Online</title>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background-color: #f0f0f0;
+    }
+    .container {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      width: 320px;
+      margin: auto;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    input, select {
+      width: 100%;
+      margin-bottom: 10px;
+      padding: 8px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+    button {
+      width: 100%;
+      padding: 10px;
+      margin: 5px 0;
+      border: none;
+      background-color: #4CAF50;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .output {
+      margin-top: 20px;
+      padding: 15px;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      background-color: #fff;
+      text-align: left;
+      line-height: 1.6;
+    }
+    .output h3 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .output p {
+      font-size: 16px;
+      margin: 6px 0;
+      display: flex;
+      justify-content: space-between;
+    }
+    .output span {
+      font-weight: bold;
+    }
+    .thank-you {
+      margin-top: 20px;
+      text-align: center;
+      font-weight: bold;
+      color: #4CAF50;
+    }
+  </style>
 </head>
 <body>
   <div class="container">
-    <h1>Struktur Produk Online</h1>
-    <form id="productForm">
-      <label for="nama">Nama:</label>
-      <input type="text" id="nama" name="nama" required>
+    <h2>Formulir Pembayaran</h2>
+    <input type="text" id="nama" placeholder="Nama">
+    <input type="text" id="produk" placeholder="Produk">
+    <input type="text" id="durasi" placeholder="Durasi">
+    <select id="pembayaran">
+      <option value="Gopay">Gopay</option>
+      <option value="QRIS">QRIS</option>
+      <option value="DANA">DANA</option>
+    </select>
+    <input type="number" id="harga" placeholder="Harga">
+    <input type="number" id="fee" placeholder="Fee">
+    <button onclick="generateStruk()">Tampilkan Struk</button>
+    <button onclick="downloadStruk()">Download Gambar</button>
 
-      <label for="produk">Produk:</label>
-      <input type="text" id="produk" name="produk" required>
-
-      <label for="masa">Masa Produk:</label>
-      <select id="masa" name="masa">
-        <option value="harian">Harian</option>
-        <option value="bulanan">Bulanan</option>
-        <option value="tahunan">Tahunan</option>
-        <option value="permanent">Permanent</option>
-      </select>
-
-      <label for="via">Pembayaran Via:</label>
-      <select id="via" name="via">
-        <option value="gopay">GoPay</option>
-        <option value="dana">Dana</option>
-        <option value="qris">QRIS</option>
-      </select>
-
-      <label for="harga">Harga Produk:</label>
-      <input type="number" id="harga" name="harga" required>
-
-      <button type="submit">Simpan Struktur</button>
-    </form>
-
-    <div class="output" id="output"></div>
-    <div class="button-group">
-      <button onclick="printPDF()">Simpan sebagai PDF</button>
-      <button onclick="saveAsImage()">Simpan sebagai JPG</button>
+    <div id="struk" class="output" style="display:none;">
+      <h3>STRUKTUR PEMBAYARAN</h3>
+      <p><strong>Nama:</strong> <span id="outNama"></span></p>
+      <p><strong>Produk:</strong> <span id="outProduk"></span></p>
+      <p><strong>Durasi:</strong> <span id="outDurasi"></span></p>
+      <p><strong>Pembayaran:</strong> <span id="outPembayaran"></span></p>
+      <p><strong>Harga:</strong> <span id="outHarga"></span></p>
+      <p><strong>Fee:</strong> <span id="outFee"></span></p>
+      <p><strong>Total:</strong> <span id="outTotal"></span></p>
+      <div class="thank-you">Terima Kasih Sudah Order Di Babas</div>
     </div>
   </div>
 
   <script>
-    const form = document.getElementById('productForm');
-    const output = document.getElementById('output');
+    function formatRupiah(number) {
+      return 'Rp ' + parseInt(number).toLocaleString('id-ID');
+    }
 
-    form.addEventListener('submit', function(e) {
-      e.preventDefault();
+    function generateStruk() {
+      const harga = parseInt(document.getElementById('harga').value);
+      const fee = parseInt(document.getElementById('fee').value);
+      const total = harga + fee;
 
-      const data = {
-        nama: form.nama.value,
-        produk: form.produk.value,
-        masa: form.masa.value,
-        via: form.via.value,
+      document.getElementById('outNama').innerText = document.getElementById('nama').value;
+      document.getElementById('outProduk').innerText = document.getElementById('produk').value;
+      document.getElementById('outDurasi').innerText = document.getElementById('durasi').value;
+      document.getElementById('outPembayaran').innerText = document.getElementById('pembayaran').value;
+      document.getElementById('outHarga').innerText = formatRupiah(harga);
+      document.getElementById('outFee').innerText = formatRupiah(fee);
+      document.getElementById('outTotal').innerText = formatRupiah(total);
+
+      document.getElementById('struk').style.display = 'block';
+    }
+
+    function downloadStruk() {
+      const struk = document.getElementById("struk");
+      html2canvas(struk).then(canvas => {
+        const link = document.createElement('a');
+        link.download = 'struk.jpg';
+        link.href = canvas.toDataURL("image/jpeg");
+        link.click();
+      });
+    }
+  </script>
+</body>
+</html>
