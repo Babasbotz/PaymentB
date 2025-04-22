@@ -4,58 +4,70 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Struktur Pembayaran Online</title>
+  <link rel="stylesheet" href="style.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      padding: 20px;
-      background-color: #f0f0f0;
+</head>
+<body>
+
+  <div class="container">
+    <h2>Form Pembayaran</h2>
+    <input type="text" id="nama" placeholder="Nama" required>
+    <input type="text" id="produk" placeholder="Produk" required>
+    <input type="text" id="durasi" placeholder="Durasi" required>
+    <select id="pembayaran" required>
+      <option value="Gopay">Gopay</option>
+      <option value="QRIS">QRIS</option>
+      <option value="DANA">DANA</option>
+    </select>
+    <input type="number" id="harga" placeholder="Harga" required>
+    <input type="number" id="fee" placeholder="Fee" required>
+    <button onclick="generateStruk()">Tampilkan Struk</button>
+    <button onclick="downloadStruk()">Download Gambar</button>
+
+    <div class="struk" id="struk">
+      <h3>STRUKTUR PEMBAYARAN</h3>
+      <p><strong>Nama:</strong> <span id="outNama"></span></p>
+      <p><strong>Produk:</strong> <span id="outProduk"></span></p>
+      <p><strong>Durasi:</strong> <span id="outDurasi"></span></p>
+      <p><strong>Pembayaran:</strong> <span id="outPembayaran"></span></p>
+      <p><strong>Harga:</strong> <span id="outHarga"></span></p>
+      <p><strong>Fee:</strong> <span id="outFee"></span></p>
+      <p><strong>Total:</strong> <span id="outTotal"></span></p>
+      <div class="thank-you">Terima Kasih Sudah Order Di Babas</div>
+    </div>
+  </div>
+
+  <script>
+    function formatRupiah(number) {
+      return 'Rp ' + parseInt(number).toLocaleString('id-ID');
     }
-    .container {
-      background: white;
-      padding: 20px;
-      border-radius: 10px;
-      width: 320px;
-      margin: auto;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+
+    function generateStruk() {
+      const harga = parseInt(document.getElementById('harga').value);
+      const fee = parseInt(document.getElementById('fee').value);
+      const total = harga + fee;
+
+      document.getElementById('outNama').innerText = document.getElementById('nama').value;
+      document.getElementById('outProduk').innerText = document.getElementById('produk').value;
+      document.getElementById('outDurasi').innerText = document.getElementById('durasi').value;
+      document.getElementById('outPembayaran').innerText = document.getElementById('pembayaran').value;
+      document.getElementById('outHarga').innerText = formatRupiah(harga);
+      document.getElementById('outFee').innerText = formatRupiah(fee);
+      document.getElementById('outTotal').innerText = formatRupiah(total);
+
+      document.getElementById('struk').style.display = 'block';
     }
-    input, select {
-      width: 100%;
-      margin-bottom: 10px;
-      padding: 8px;
-      border-radius: 5px;
-      border: 1px solid #ccc;
+
+    function downloadStruk() {
+      const struk = document.getElementById("struk");
+      html2canvas(struk).then(canvas => {
+        const link = document.createElement('a');
+        link.download = 'struk.jpg';
+        link.href = canvas.toDataURL("image/jpeg");
+        link.click();
+      });
     }
-    button {
-      width: 100%;
-      padding: 10px;
-      margin: 5px 0;
-      border: none;
-      background-color: #4CAF50;
-      color: white;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-    .output {
-      margin-top: 20px;
-      padding: 15px;
-      border: 1px solid #ddd;
-      border-radius: 10px;
-      background-color: #fff;
-      text-align: left;
-      line-height: 1.6;
-    }
-    .output h3 {
-      text-align: center;
-      margin-bottom: 20px;
-    }
-    .output p {
-      font-size: 16px;
-      margin: 6px 0;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .output p strong {
-      min-width: 120
-      
+  </script>
+
+</body>
+</html>
