@@ -1,41 +1,72 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
-    <title>Halaman Pembayaran</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Struktur Produk Online</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <h1>Pembayaran Produk</h1>
-        <form action="#" method="POST">
-            <div class="form-group">
-                <label for="name">Nama Lengkap</label>
-                <input type="text" id="name" name="name" required>
-            </div>
-            <div class="form-group">
-                <label for="product">Produk</label>
-                <input type="text" id="product" name="product" required>
-            </div>
-            <div class="form-group">
-                <label for="duration">Masa Produk (bulan)</label>
-                <input type="number" id="duration" name="duration" required>
-            </div>
-            <div class="form-group">
-                <label for="price">Harga (Rp)</label>
-                <input type="text" id="price" name="price" required>
-            </div>
-            <div class="form-group">
-                <label for="payment-method">Metode Pembayaran</label>
-                <select id="payment-method" name="payment-method" required>
-                    <option value="qris">QRIS</option>
-                    <option value="gopay">GoPay</option>
-                    <option value="dana">Dana</option>
-                </select>
-            </div>
-            <button type="submit" class="btn">Bayar Sekarang</button>
-        </form>
-    </div>
+  <div class="container">
+    <h1>Struktur Produk Online</h1>
+    <form id="productForm">
+      <label for="nama">Nama:</label>
+      <input type="text" id="nama" name="nama" required>
+
+      <label for="produk">Produk:</label>
+      <input type="text" id="produk" name="produk" required>
+
+      <label for="masa">Masa Produk:</label>
+      <select id="masa" name="masa">
+        <option value="harian">Harian</option>
+        <option value="bulanan">Bulanan</option>
+        <option value="tahunan">Tahunan</option>
+        <option value="permanent">Permanent</option>
+      </select>
+
+      <label for="via">Pembayaran Via:</label>
+      <select id="via" name="via">
+        <option value="gopay">GoPay</option>
+        <option value="dana">Dana</option>
+        <option value="qris">QRIS</option>
+      </select>
+
+      <label for="harga">Harga Produk:</label>
+      <input type="number" id="harga" name="harga" required>
+
+      <button type="submit">Simpan Struktur</button>
+    </form>
+
+    <div class="output" id="output"></div>
+  </div>
+
+  <script>
+    const form = document.getElementById('productForm');
+    const output = document.getElementById('output');
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const data = {
+        nama: form.nama.value,
+        produk: form.produk.value,
+        masa: form.masa.value,
+        via: form.via.value,
+        harga: form.harga.value
+      };
+
+      const savedData = `
+        <div class="card">
+          <h2>${data.nama}</h2>
+          <p><strong>Produk:</strong> ${data.produk}</p>
+          <p><strong>Masa:</strong> ${data.masa}</p>
+          <p><strong>Pembayaran via:</strong> ${data.via}</p>
+          <p><strong>Harga:</strong> Rp${data.harga}</p>
+        </div>
+      `;
+
+      output.innerHTML = savedData;
+    });
+  </script>
 </body>
 </html>
