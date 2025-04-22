@@ -1,10 +1,5 @@
 body {
   font-family: 'Arial', sans-serif;
-  background: linear-gradient(45deg, rgba(76, 175, 80, 0.2) 25%, rgba(255, 255, 255, 0.2) 25%) 0 0,
-              linear-gradient(-45deg, rgba(76, 175, 80, 0.2) 25%, rgba(255, 255, 255, 0.2) 25%) 0 0,
-              linear-gradient(45deg, rgba(255, 255, 255, 0.2) 25%, rgba(76, 175, 80, 0.2) 25%) 0 0,
-              linear-gradient(-45deg, rgba(255, 255, 255, 0.2) 25%, rgba(76, 175, 80, 0.2) 25%) 0 0;
-  background-size: 10px 10px;
   background-color: #f4f7fc;
   margin: 0;
   padding: 0;
@@ -12,21 +7,6 @@ body {
   justify-content: center;
   align-items: center;
   height: 100vh;
-  position: relative;
-  color: #333;
-  text-align: center;
-}
-
-body::after {
-  content: "BABAS";
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 100px;
-  font-weight: bold;
-  color: rgba(0, 128, 0, 0.1); /* Transparan Hijau */
-  z-index: -1;
 }
 
 .container {
@@ -75,6 +55,7 @@ button:hover {
   border: 1px solid #ddd;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   display: none;
+  position: relative;
 }
 
 .struk h3 {
@@ -95,4 +76,17 @@ button:hover {
   font-weight: bold;
   margin-top: 20px;
   color: #4CAF50;
+}
+
+/* Menambahkan background dengan tulisan "BABAS" pada struk */
+.struk::after {
+  content: "BABAS";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 100px;
+  font-weight: bold;
+  color: rgba(0, 128, 0, 0.1); /* Warna hijau transparan */
+  z-index: -1;
 }
