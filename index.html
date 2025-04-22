@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="container">
+  <div class="container" id="captureArea">
     <h2>Form Struktur Pembayaran</h2>
     <form id="paymentForm">
       <input type="text" placeholder="Nama" id="nama" required />
@@ -43,6 +43,11 @@
     </table>
   </div>
 
+  <div class="btn-download">
+    <button onclick="downloadAsImage()">Simpan Sebagai Gambar</button>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
   <script>
     const form = document.getElementById('paymentForm');
     const tableBody = document.querySelector('#dataTable tbody');
@@ -72,6 +77,17 @@
       totalHargaCell.textContent = 'Total: Rp ' + total.toLocaleString('id-ID');
       form.reset();
     });
+
+    function downloadAsImage() {
+      const captureElement = document.getElementById('captureArea');
+      html2canvas(captureElement).then(canvas => {
+        const link = document.createElement('a');
+        link.download = 'struktur-pembayaran.png';
+        link.href = canvas.toDataURL();
+        link.click();
+      });
+    }
   </script>
 </body>
-</html>
+  </html>
+  
