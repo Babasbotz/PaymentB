@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ringkasan Pembayaran</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Ringkasan Pembayaran</h1>
+    </header>
+    
+    <main>
+        <h2>Terima Kasih!</h2>
+        <p>Berikut adalah ringkasan pembayaran Anda:</p>
+        <div id="summary"></div>
+        <button onclick="goBack()">Kembali</button>
+    </main>
+
+    <footer>
+        <p>&copy; 2023 Pembayaran Offline. Semua hak dilindungi.</p>
+    </footer>
+
+    <script>
+        function displaySummary() {
+            const name = localStorage.getItem('name');
+            const email = localStorage.getItem('email');
+            const amount = localStorage.getItem('amount');
+
+            const summaryDiv = document.getElementById('summary');
+            summaryDiv.innerHTML = `
+                <p>Nama: ${name}</p>
+                <p>Email: ${email}</p>
+                <p>Jumlah Pembayaran: Rp${amount}</p>
+            `;
+        }
+
+        function goBack() {
+            window.history.back();
+        }
+
+        // Tampilkan ringkasan saat halaman dimuat
+        window.onload = displaySummary;
+    </script>
+</body>
+</html>

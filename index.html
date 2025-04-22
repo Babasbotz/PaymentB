@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pembayaran Offline</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Pembayaran Offline</h1>
+    </header>
+    
+    <main>
+        <h2>Form Pembayaran</h2>
+        <form id="paymentForm">
+            <label for="name">Nama:</label>
+            <input type="text" id="name" name="name" required>
+            
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+            
+            <label for="amount">Jumlah Pembayaran:</label>
+            <input type="number" id="amount" name="amount" required>
+            
+            <button type="button" onclick="submitPayment()">Bayar</button>
+        </form>
+    </main>
+
+    <footer>
+        <p>&copy; 2023 Pembayaran Offline. Semua hak dilindungi.</p>
+    </footer>
+
+    <script>
+        function submitPayment() {
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const amount = document.getElementById('amount').value;
+
+            // Simulasi pengalihan ke halaman ringkasan
+            localStorage.setItem('name', name);
+            localStorage.setItem('email', email);
+            localStorage.setItem('amount', amount);
+            window.location.href = 'summary.html';
+        }
+    </script>
+</body>
+</html>
