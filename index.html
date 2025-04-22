@@ -1,26 +1,26 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Struktur Pembayaran</title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <div class="container" id="captureArea">
-    <h2>Form Struktur Pembayaran</h2>
+    <h2>Struktur Pembayaran Offline</h2>
     <form id="paymentForm">
-      <input type="text" placeholder="Nama" id="nama" required />
-      <input type="text" placeholder="Produk" id="produk" required />
-      <input type="text" placeholder="Masa Produk (contoh: 12 Bulan)" id="masa" required />
-      <input type="number" placeholder="Harga (Rp)" id="harga" required />
+      <input type="text" id="nama" placeholder="Nama" required>
+      <input type="text" id="produk" placeholder="Produk" required>
+      <input type="text" id="masa" placeholder="Masa Produk" required>
+      <input type="number" id="harga" placeholder="Harga (Rp)" required>
       <select id="via" required>
-        <option value="">Pilih Metode Pembayaran</option>
+        <option value="">Via</option>
         <option value="Transfer Bank">Transfer Bank</option>
         <option value="QRIS">QRIS</option>
         <option value="Tunai">Tunai</option>
       </select>
-      <button type="submit">Tambah Data</button>
+      <button type="submit">Tambah</button>
     </form>
 
     <table id="dataTable">
@@ -43,8 +43,8 @@
     </table>
   </div>
 
-  <div class="btn-download">
-    <button onclick="downloadAsImage()">Simpan Sebagai Gambar</button>
+  <div class="download">
+    <button onclick="downloadImage()">Simpan Struktur sebagai Gambar</button>
   </div>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
@@ -56,7 +56,6 @@
 
     form.addEventListener('submit', function(e) {
       e.preventDefault();
-
       const nama = document.getElementById('nama').value;
       const produk = document.getElementById('produk').value;
       const masa = document.getElementById('masa').value;
@@ -71,16 +70,15 @@
         <td>Rp ${harga.toLocaleString('id-ID')}</td>
         <td>${via}</td>
       `;
-
       tableBody.appendChild(row);
+
       total += harga;
       totalHargaCell.textContent = 'Total: Rp ' + total.toLocaleString('id-ID');
       form.reset();
     });
 
-    function downloadAsImage() {
-      const captureElement = document.getElementById('captureArea');
-      html2canvas(captureElement).then(canvas => {
+    function downloadImage() {
+      html2canvas(document.getElementById('captureArea')).then(canvas => {
         const link = document.createElement('a');
         link.download = 'struktur-pembayaran.png';
         link.href = canvas.toDataURL();
