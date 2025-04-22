@@ -1,6 +1,6 @@
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: linear-gradient(135deg, #74ebd5, #9face6);
+  font-family: 'Arial', sans-serif;
+  background-color: #f4f7fc;
   margin: 0;
   padding: 0;
   display: flex;
@@ -10,70 +10,69 @@ body {
 }
 
 .container {
-  background-color: white;
-  padding: 2rem;
-  border-radius: 15px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-  max-width: 400px;
-  width: 100%;
-}
-
-h1 {
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  width: 350px;
+  padding: 20px;
   text-align: center;
-  margin-bottom: 1.5rem;
-  color: #333;
 }
 
-label {
-  display: block;
-  margin-top: 1rem;
-  margin-bottom: 0.5rem;
-  color: #555;
+h2 {
+  color: #4CAF50;
+  margin-bottom: 20px;
+}
+
+input, select, button {
+  width: 100%;
+  padding: 12px;
+  margin: 8px 0;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 16px;
 }
 
 input, select {
-  width: 100%;
-  padding: 0.5rem;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  box-sizing: border-box;
+  background-color: #f9f9f9;
 }
 
 button {
-  width: 100%;
-  margin-top: 1.5rem;
-  padding: 0.75rem;
-  background-color: #4f8ef7;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  font-size: 1rem;
+  background-color: #4CAF50;
+  color: #fff;
   cursor: pointer;
   transition: background-color 0.3s;
 }
 
 button:hover {
-  background-color: #3b6ed5;
+  background-color: #45a049;
 }
 
-.output {
-  margin-top: 2rem;
-}
-
-.card {
+.struk {
+  margin-top: 30px;
+  padding: 20px;
+  border-radius: 8px;
   background-color: #f9f9f9;
-  padding: 1rem;
-  border-radius: 10px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-  transition: all 0.3s ease-in-out;
+  border: 1px solid #ddd;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  display: none;
 }
 
-.card h2 {
-  margin-top: 0;
-  color: #222;
+.struk h3 {
+  margin: 0;
+  font-size: 18px;
+  color: #4CAF50;
 }
 
-.card p {
-  margin: 0.5rem 0;
-  color: #444;
+.struk p {
+  font-size: 16px;
+  margin: 10px 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+.thank-you {
+  font-size: 16px;
+  font-weight: bold;
+  margin-top: 20px;
+  color: #4CAF50;
 }
