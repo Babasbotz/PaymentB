@@ -13,7 +13,7 @@ body {
   background-color: #fff;
   border-radius: 10px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  width: 350px;
+  width: 320px;
   padding: 20px;
   text-align: center;
 }
@@ -49,14 +49,13 @@ button:hover {
 
 .struk {
   margin-top: 30px;
-  padding: 20px;
+  padding: 15px;
   border-radius: 8px;
-  background-color: #f9f9f9;
+  background-color: #e0f7fa; /* Warna biru muda */
   border: 1px solid #ddd;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   display: none;
   position: relative;
-  background: linear-gradient(135deg, #f7b7b7, #f4b6c4);
 }
 
 .struk h3 {
@@ -66,14 +65,15 @@ button:hover {
 }
 
 .struk p {
-  font-size: 16px;
-  margin: 10px 0;
+  font-size: 14px;  /* Ukuran font lebih kecil */
+  margin: 8px 0;
   display: flex;
   justify-content: space-between;
+  line-height: 1.6;
 }
 
 .thank-you {
-  font-size: 16px;
+  font-size: 14px;
   font-weight: bold;
   margin-top: 20px;
   color: #4CAF50;
