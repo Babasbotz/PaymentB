@@ -5,26 +5,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pembayaran Offline</title>
     <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <header>
-        <h1>Pembayaran Offline</h1>
+        <h1>Pembayaran Produk</h1>
     </header>
     
     <main>
-        <h2>Form Pembayaran</h2>
-        <form id="paymentForm">
-            <label for="name">Nama:</label>
-            <input type="text" id="name" name="name" required>
-            
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required>
-            
-            <label for="amount">Jumlah Pembayaran:</label>
-            <input type="number" id="amount" name="amount" required>
-            
-            <button type="button" onclick="submitPayment()">Bayar</button>
-        </form>
+        <div class="form-container">
+            <h2>Form Pembayaran</h2>
+            <form id="paymentForm">
+                <label for="name">Nama:</label>
+                <input type="text" id="name" name="name" required>
+                
+                <label for="product">Produk:</label>
+                <input type="text" id="product" name="product" required>
+                
+                <label for="duration">Masa Produk (bulan):</label>
+                <input type="number" id="duration" name="duration" required>
+                
+                <label for="price">Harga (Rp):</label>
+                <input type="number" id="price" name="price" required>
+                
+                <label for="paymentMethod">Via Pembayaran:</label>
+                <select id="paymentMethod" name="paymentMethod" required>
+                    <option value="transfer">Transfer Bank</option>
+                    <option value="cash">Tunai</option>
+                    <option value="credit_card">Kartu Kredit</option>
+                </select>
+                
+                <button type="button" onclick="submitPayment()">Bayar</button>
+            </form>
+        </div>
     </main>
 
     <footer>
@@ -34,13 +47,20 @@
     <script>
         function submitPayment() {
             const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const amount = document.getElementById('amount').value;
+            const product = document.getElementById('product').value;
+            const duration = document.getElementById('duration').value;
+            const price = document.getElementById('price').value;
+            const paymentMethod = document.getElementById('paymentMethod').value;
+
+            const total = price * duration;
 
             // Simulasi pengalihan ke halaman ringkasan
             localStorage.setItem('name', name);
-            localStorage.setItem('email', email);
-            localStorage.setItem('amount', amount);
+            localStorage.setItem('product', product);
+            localStorage.setItem('duration', duration);
+            localStorage.setItem('price', price);
+            localStorage.setItem('paymentMethod', paymentMethod);
+            localStorage.setItem('total', total);
             window.location.href = 'summary.html';
         }
     </script>
