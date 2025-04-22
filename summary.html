@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ringkasan Pembayaran</title>
     <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <header>
@@ -12,10 +13,12 @@
     </header>
     
     <main>
-        <h2>Terima Kasih!</h2>
-        <p>Berikut adalah ringkasan pembayaran Anda:</p>
-        <div id="summary"></div>
-        <button onclick="goBack()">Kembali</button>
+        <div class="summary-container">
+            <h2>Terima Kasih!</h2>
+            <p>Berikut adalah ringkasan pembayaran Anda:</p>
+            <div id="summary"></div>
+            <button onclick="goBack()">Kembali</button>
+        </div>
     </main>
 
     <footer>
@@ -25,23 +28,7 @@
     <script>
         function displaySummary() {
             const name = localStorage.getItem('name');
-            const email = localStorage.getItem('email');
-            const amount = localStorage.getItem('amount');
-
-            const summaryDiv = document.getElementById('summary');
-            summaryDiv.innerHTML = `
-                <p>Nama: ${name}</p>
-                <p>Email: ${email}</p>
-                <p>Jumlah Pembayaran: Rp${amount}</p>
-            `;
-        }
-
-        function goBack() {
-            window.history.back();
-        }
-
-        // Tampilkan ringkasan saat halaman dimuat
-        window.onload = displaySummary;
-    </script>
-</body>
-</html>
+            const product = localStorage.getItem('product');
+            const duration = localStorage.getItem('duration');
+            const price = localStorage.getItem('price');
+            const paymentMethod = localStorage.getItem('payment
