@@ -57,35 +57,3 @@
         produk: form.produk.value,
         masa: form.masa.value,
         via: form.via.value,
-        harga: form.harga.value
-      };
-
-      const savedData = `
-        <div class="card" id="cardContent">
-          <h2>${data.nama}</h2>
-          <p><strong>Produk:</strong> ${data.produk}</p>
-          <p><strong>Masa:</strong> ${data.masa}</p>
-          <p><strong>Pembayaran via:</strong> ${data.via}</p>
-          <p><strong>Harga:</strong> Rp${data.harga}</p>
-        </div>
-      `;
-
-      output.innerHTML = savedData;
-    });
-
-    function printPDF() {
-      window.print();
-    }
-
-    function saveAsImage() {
-      const card = document.getElementById('cardContent');
-      html2canvas(card).then(canvas => {
-        const link = document.createElement('a');
-        link.download = 'struktur-produk.jpg';
-        link.href = canvas.toDataURL();
-        link.click();
-      });
-    }
-  </script>
-</body>
-</html>
