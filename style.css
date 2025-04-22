@@ -56,12 +56,16 @@ button:hover {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   display: none;
   position: relative;
+  max-width: 300px; /* Membatasi lebar kolom struk */
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .struk h3 {
   margin: 0;
   font-size: 18px;
   color: #4CAF50;
+  text-align: center;
 }
 
 .struk p {
@@ -77,4 +81,14 @@ button:hover {
   font-weight: bold;
   margin-top: 20px;
   color: #4CAF50;
+  text-align: center;
+}
+
+input[type="text"], input[type="number"], select {
+  box-sizing: border-box;  /* Menjaga ukuran input tetap dalam batas */
+  overflow: hidden;
+}
+
+button {
+  margin-top: 10px;
 }
