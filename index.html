@@ -5,57 +5,91 @@
   <title>Struktur Pembayaran Online</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
-      background: #f0f0f0;
+      font-family: 'Segoe UI', sans-serif;
+      background: #f0f2f5;
+      margin: 0;
       padding: 20px;
     }
+
     .container {
-      max-width: 700px;
+      max-width: 400px;
       margin: auto;
-      background: white;
+      background: #fff;
       padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 0 10px #ccc;
+      border-radius: 12px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
     }
+
     h2 {
       text-align: center;
+      margin-bottom: 20px;
+      color: #333;
     }
+
     label {
       display: block;
-      margin-top: 10px;
+      margin: 10px 0 5px;
+      font-weight: 500;
     }
+
     input, select {
       width: 100%;
       padding: 8px;
-      margin-top: 5px;
-    }
-    .result {
-      margin-top: 20px;
-      padding: 20px;
-      background: #f9f9f9;
+      border-radius: 6px;
       border: 1px solid #ccc;
-      border-radius: 8px;
     }
+
     button {
+      width: 100%;
       margin-top: 15px;
-      padding: 10px 15px;
-      cursor: pointer;
-      background: #007bff;
+      padding: 10px;
+      background-color: #007bff;
       color: white;
       border: none;
-      border-radius: 5px;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .result {
+      margin-top: 20px;
+      padding: 15px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      background: #fdfdfd;
+    }
+
+    .result h3 {
+      text-align: center;
+      margin-bottom: 15px;
+      color: #333;
+    }
+
+    .result p {
+      margin: 6px 0;
+      font-size: 14px;
+    }
+
+    @media(max-width: 450px) {
+      body {
+        padding: 10px;
+      }
+
+      .container {
+        padding: 15px;
+      }
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <h2>Struktur Pembayaran Online</h2>
+    <h2>Struktur Pembayaran</h2>
     <label>Nama Pembeli</label>
     <input type="text" id="nama">
-    
+
     <label>Nomor Pembeli</label>
     <input type="text" id="nomor">
-    
+
     <label>Produk</label>
     <select id="produk" onchange="toggleLinkGrup()">
       <option value="">Pilih Produk</option>
@@ -64,7 +98,7 @@
       <option value="Sewabot Grup Plus">Sewabot Grup Plus</option>
       <option value="Sewabot Grup VVIP">Sewabot Grup VVIP</option>
     </select>
-    
+
     <label>Payment</label>
     <select id="payment">
       <option value="">Pilih Metode</option>
@@ -72,25 +106,25 @@
       <option value="Dana">Dana</option>
       <option value="Gopay">Gopay</option>
     </select>
-    
+
     <label>Harga</label>
     <input type="text" id="harga">
-    
+
     <label>Nomor Premium</label>
     <input type="text" id="nomorpremium">
-    
+
     <div id="linkgrupField">
       <label>Link Grup</label>
       <input type="text" id="linkgrup">
     </div>
-    
+
     <button onclick="generateResult()">Tampilkan Struktur</button>
-    
+
     <div id="result" class="result" style="display:none">
       <div id="captureArea">
         <h3>Struktur Pembayaran</h3>
-        <p><strong>Nama Pembeli:</strong> <span id="r_nama"></span></p>
-        <p><strong>Nomor Pembeli:</strong> <span id="r_nomor"></span></p>
+        <p><strong>Nama:</strong> <span id="r_nama"></span></p>
+        <p><strong>Nomor:</strong> <span id="r_nomor"></span></p>
         <p><strong>Produk:</strong> <span id="r_produk"></span></p>
         <p><strong>Payment:</strong> <span id="r_payment"></span></p>
         <p><strong>Harga:</strong> <span id="r_harga"></span></p>
@@ -117,7 +151,7 @@
       const harga = document.getElementById('harga').value;
       const nomorpremium = document.getElementById('nomorpremium').value;
       const linkgrup = document.getElementById('linkgrup').value;
-      
+
       document.getElementById('r_nama').textContent = nama;
       document.getElementById('r_nomor').textContent = nomor;
       document.getElementById('r_produk').textContent = produk;
