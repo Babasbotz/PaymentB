@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Struktur Pembayaran</title>
   <link rel="stylesheet" href="style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
 </head>
 <body>
   <div class="container" id="payment-structure">
@@ -47,7 +48,13 @@
       <input type="text" id="link-grup" class="value" placeholder="Masukkan Link Grup" />
     </div>
 
-    <div class="footer">Terima Kasih Sudah Order Di Babas</div>
+    <button id="show-button">Tampilkan Hasil</button>
+  </div>
+
+  <!-- Bagian untuk menampilkan hasil struktur pembayaran -->
+  <div id="result-container" style="display: none;">
+    <h3>Hasil Struktur Pembayaran</h3>
+    <div id="result"></div>
     <button id="save-button">Simpan sebagai Gambar</button>
   </div>
 
