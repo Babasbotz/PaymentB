@@ -2,95 +2,55 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8">
-  <title>Struktur Pembayaran Online</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Struktur Pembayaran</title>
   <link rel="stylesheet" href="style.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 </head>
 <body>
-  <div class="container">
-    <h2>Form Pembayaran</h2>
+  <div class="container" id="payment-structure">
+    <h2>STRUKTUR PEMBAYARAN</h2>
 
-    <input type="file" id="logo" accept="image/*" onchange="previewLogo()" />
-    <input type="text" id="nama" placeholder="Nama" required>
-
-    <select id="produk" required>
-      <option value="Premium User">Premium User</option>
-      <option value="Sewabot Grup Basic">Sewabot Grup Basic</option>
-      <option value="Sewabot Grup Plus">Sewabot Grup Plus</option>
-      <option value="Sewabot Grup VVIP">Sewabot Grup VVIP</option>
-    </select>
-
-    <input type="text" id="durasi" placeholder="Durasi" required>
-
-    <select id="pembayaran" required>
-      <option value="Gopay">Gopay</option>
-      <option value="QRIS">QRIS</option>
-      <option value="DANA">DANA</option>
-    </select>
-
-    <input type="number" id="harga" placeholder="Harga" required>
-    <input type="text" id="nomor" placeholder="Nomor Premium User" required>
-    <input type="text" id="link" placeholder="Link Grup" required>
-
-    <button onclick="generateStruk()">Tampilkan Struk</button>
-    <button onclick="downloadStruk()">Download Gambar</button>
-
-    <div class="struk" id="struk">
-      <img id="logoPreview" alt="Logo" style="max-width: 80px; max-height: 80px;">
-      <h3>STRUKTUR PEMBAYARAN</h3>
-      <p><strong>Nama:</strong> <span id="outNama"></span></p>
-      <p><strong>Produk:</strong> <span id="outProduk"></span></p>
-      <p><strong>Durasi:</strong> <span id="outDurasi"></span></p>
-      <p><strong>Pembayaran:</strong> <span id="outPembayaran"></span></p>
-      <p><strong>Harga:</strong> <span id="outHarga"></span></p>
-      <p><strong>Nomor Premium:</strong> <span id="outNomor"></span></p>
-      <p><strong>Link Grup:</strong> <span id="outLink"></span></p>
-      <div class="thank-you">Terima Kasih Sudah Order Di Babas</div>
+    <div class="item">
+      <span class="label">Nama:</span>
+      <input type="text" id="nama" class="value" placeholder="Masukkan Nama" />
     </div>
+
+    <div class="item">
+      <span class="label">Produk:</span>
+      <select id="produk" class="value">
+        <option value="Premium User">Premium User</option>
+        <option value="Sewabot Grup Basic">Sewabot Grup Basic</option>
+        <option value="Sewabot Grup Plus">Sewabot Grup Plus</option>
+        <option value="Sewabot Grup VVIP">Sewabot Grup VVIP</option>
+      </select>
+    </div>
+
+    <div class="item">
+      <span class="label">Durasi:</span>
+      <input type="text" id="durasi" class="value" placeholder="Masukkan Durasi" />
+    </div>
+
+    <div class="item">
+      <span class="label">Harga:</span>
+      <input type="text" id="harga" class="value" placeholder="Masukkan Harga" />
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="item">
+      <span class="label">Nomor Premium:</span>
+      <input type="text" id="nomor-premium" class="value" placeholder="Masukkan Nomor Premium" />
+    </div>
+
+    <div class="item">
+      <span class="label">Link Grup:</span>
+      <input type="text" id="link-grup" class="value" placeholder="Masukkan Link Grup" />
+    </div>
+
+    <div class="footer">Terima Kasih Sudah Order Di Babas</div>
+    <button id="save-button">Simpan sebagai Gambar</button>
   </div>
 
-  <script>
-    function formatRupiah(number) {
-      return 'Rp ' + parseInt(number).toLocaleString('id-ID');
-    }
-
-    function previewLogo() {
-      const logoInput = document.getElementById("logo");
-      const logoPreview = document.getElementById("logoPreview");
-      const file = logoInput.files[0];
-
-      if (file) {
-        const reader = new FileReader();
-        reader.onload = function(e) {
-          logoPreview.src = e.target.result;
-        };
-        reader.readAsDataURL(file);
-      }
-    }
-
-    function generateStruk() {
-      const harga = parseInt(document.getElementById('harga').value);
-
-      document.getElementById('outNama').innerText = document.getElementById('nama').value;
-      document.getElementById('outProduk').innerText = document.getElementById('produk').value;
-      document.getElementById('outDurasi').innerText = document.getElementById('durasi').value;
-      document.getElementById('outPembayaran').innerText = document.getElementById('pembayaran').value;
-      document.getElementById('outHarga').innerText = formatRupiah(harga);
-      document.getElementById('outNomor').innerText = document.getElementById('nomor').value;
-      document.getElementById('outLink').innerText = document.getElementById('link').value;
-
-      document.getElementById('struk').style.display = 'block';
-    }
-
-    function downloadStruk() {
-      const struk = document.getElementById("struk");
-      html2canvas(struk).then(canvas => {
-        const link = document.createElement('a');
-        link.download = 'struk.jpg';
-        link.href = canvas.toDataURL("image/jpeg");
-        link.click();
-      });
-    }
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>
