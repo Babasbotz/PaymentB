@@ -15,6 +15,7 @@ body {
   border-radius: 12px;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
   width: 340px;
+  box-sizing: border-box;
 }
 
 h2 {
@@ -30,6 +31,7 @@ input, select, button {
   border: 1px solid #ddd;
   border-radius: 6px;
   font-size: 15px;
+  box-sizing: border-box;
 }
 
 button {
@@ -53,6 +55,8 @@ button:hover {
   display: none;
   text-align: left;
   font-size: 14px;
+  word-wrap: break-word;
+  box-sizing: border-box;
 }
 
 .struk h3 {
@@ -64,6 +68,8 @@ button:hover {
   margin: 6px 0;
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
+  word-break: break-word;
 }
 
 .thank-you {
