@@ -126,6 +126,15 @@
       border-top: 1px dashed #ccc;
       padding-top: 15px;
     }
+
+    .logo-preview {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin: 20px auto 0;
+      display: block;
+    }
   </style>
 </head>
 <body>
@@ -178,11 +187,17 @@
       <input type="text" id="linkgrup">
     </div>
 
+    <div class="form-group">
+      <label for="logo">Upload Logo</label>
+      <input type="file" id="logo" accept="image/*" onchange="previewLogo(event)">
+    </div>
+
     <button onclick="generateResult()">Tampilkan Struktur</button>
 
     <div id="result" class="result" style="display:none">
       <div id="captureArea">
         <h3>Struktur Pembayaran</h3>
+        <img id="logoPreview" class="logo-preview" style="display:none"/>
         <div class="result-detail">
           <p><span>Nama:</span> <span id="r_nama"></span></p>
           <p><span>Nomor:</span> <span id="r_nomor"></span></p>
@@ -217,7 +232,21 @@
       document.getElementById('r_nomorpremium').textContent = document.getElementById('nomorpremium').value;
       document.getElementById('r_linkgrup').textContent = document.getElementById('linkgrup').value;
       document.getElementById('r_linkgroup_wrap').style.display = (document.getElementById('produk').value === "Premium User") ? 'none' : 'flex';
+
       document.getElementById('result').style.display = 'block';
+    }
+
+    function previewLogo(event) {
+      const file = event.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          const logoImg = document.getElementById('logoPreview');
+          logoImg.src = e.target.result;
+          logoImg.style.display = 'block';
+        }
+        reader.readAsDataURL(file);
+      }
     }
 
     function downloadAsImage() {
