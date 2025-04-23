@@ -2,18 +2,17 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Struktur Pembayaran Online</title>
   <link rel="stylesheet" href="style.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 </head>
 <body>
-
   <div class="container">
     <h2>Form Pembayaran</h2>
+
     <input type="file" id="logo" accept="image/*" onchange="previewLogo()" />
     <input type="text" id="nama" placeholder="Nama" required>
-    
+
     <select id="produk" required>
       <option value="Premium User">Premium User</option>
       <option value="Sewabot Grup Basic">Sewabot Grup Basic</option>
@@ -22,7 +21,7 @@
     </select>
 
     <input type="text" id="durasi" placeholder="Durasi" required>
-    
+
     <select id="pembayaran" required>
       <option value="Gopay">Gopay</option>
       <option value="QRIS">QRIS</option>
@@ -30,21 +29,22 @@
     </select>
 
     <input type="number" id="harga" placeholder="Harga" required>
-    <input type="number" id="fee" placeholder="Fee" required>
-    
+    <input type="text" id="nomor" placeholder="Nomor Premium User" required>
+    <input type="text" id="link" placeholder="Link Grup" required>
+
     <button onclick="generateStruk()">Tampilkan Struk</button>
     <button onclick="downloadStruk()">Download Gambar</button>
 
     <div class="struk" id="struk">
-      <img id="logoPreview" alt="Logo" style="max-width: 80px; max-height: 80px; margin-bottom: 10px;">
+      <img id="logoPreview" alt="Logo" style="max-width: 80px; max-height: 80px;">
       <h3>STRUKTUR PEMBAYARAN</h3>
       <p><strong>Nama:</strong> <span id="outNama"></span></p>
       <p><strong>Produk:</strong> <span id="outProduk"></span></p>
       <p><strong>Durasi:</strong> <span id="outDurasi"></span></p>
       <p><strong>Pembayaran:</strong> <span id="outPembayaran"></span></p>
       <p><strong>Harga:</strong> <span id="outHarga"></span></p>
-      <p><strong>Fee:</strong> <span id="outFee"></span></p>
-      <p><strong>Total:</strong> <span id="outTotal"></span></p>
+      <p><strong>Nomor Premium:</strong> <span id="outNomor"></span></p>
+      <p><strong>Link Grup:</strong> <span id="outLink"></span></p>
       <div class="thank-you">Terima Kasih Sudah Order Di Babas</div>
     </div>
   </div>
@@ -70,16 +70,14 @@
 
     function generateStruk() {
       const harga = parseInt(document.getElementById('harga').value);
-      const fee = parseInt(document.getElementById('fee').value);
-      const total = harga + fee;
 
       document.getElementById('outNama').innerText = document.getElementById('nama').value;
       document.getElementById('outProduk').innerText = document.getElementById('produk').value;
       document.getElementById('outDurasi').innerText = document.getElementById('durasi').value;
       document.getElementById('outPembayaran').innerText = document.getElementById('pembayaran').value;
       document.getElementById('outHarga').innerText = formatRupiah(harga);
-      document.getElementById('outFee').innerText = formatRupiah(fee);
-      document.getElementById('outTotal').innerText = formatRupiah(total);
+      document.getElementById('outNomor').innerText = document.getElementById('nomor').value;
+      document.getElementById('outLink').innerText = document.getElementById('link').value;
 
       document.getElementById('struk').style.display = 'block';
     }
@@ -94,6 +92,5 @@
       });
     }
   </script>
-
 </body>
 </html>
