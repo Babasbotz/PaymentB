@@ -1,51 +1,144 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Struktur Pembayaran Online</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <title>Struktur Pembayaran Online</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f0f0f0;
+      padding: 20px;
+    }
+    .container {
+      max-width: 700px;
+      margin: auto;
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px #ccc;
+    }
+    h2 {
+      text-align: center;
+    }
+    label {
+      display: block;
+      margin-top: 10px;
+    }
+    input, select {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+    }
+    .result {
+      margin-top: 20px;
+      padding: 20px;
+      background: #f9f9f9;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
+    button {
+      margin-top: 15px;
+      padding: 10px 15px;
+      cursor: pointer;
+      background: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Struktur Pembayaran Online</h1>
-        <table>
-            <thead>
-                <tr>
-                    <th>Nama Pembeli</th>
-                    <th>Nomor Pembeli</th>
-                    <th>Produk</th>
-                    <th>Payment</th>
-                    <th>Harga</th>
-                    <th>Nomor Premium</th>
-                    <th>Link Grup</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td><input type="text" placeholder="Nama Pembeli"></td>
-                    <td><input type="text" placeholder="Nomor Pembeli"></td>
-                    <td>
-                        <select>
-                            <option>Premium User</option>
-                            <option>Sewabot Grup Basic</option>
-                            <option>Sewabot Grup Plus</option>
-                            <option>Sewabot Grup VVIP</option>
-                        </select>
-                    </td>
-                    <td>
-                        <select>
-                            <option>Qris</option>
-                            <option>Dana</option>
-                            <option>Gopay</option>
-                        </select>
-                    </td>
-                    <td><input type="number" placeholder="Harga"></td>
-                    <td><input type="text" placeholder="Nomor Premium"></td>
-                    <td><input type="text" placeholder="Link Grup"></td>
-                </tr>
-            </tbody>
-        </table>
+  <div class="container">
+    <h2>Struktur Pembayaran Online</h2>
+    <label>Nama Pembeli</label>
+    <input type="text" id="nama">
+    
+    <label>Nomor Pembeli</label>
+    <input type="text" id="nomor">
+    
+    <label>Produk</label>
+    <select id="produk" onchange="toggleLinkGrup()">
+      <option value="">Pilih Produk</option>
+      <option value="Premium User">Premium User</option>
+      <option value="Sewabot Grup Basic">Sewabot Grup Basic</option>
+      <option value="Sewabot Grup Plus">Sewabot Grup Plus</option>
+      <option value="Sewabot Grup VVIP">Sewabot Grup VVIP</option>
+    </select>
+    
+    <label>Payment</label>
+    <select id="payment">
+      <option value="">Pilih Metode</option>
+      <option value="Qris">Qris</option>
+      <option value="Dana">Dana</option>
+      <option value="Gopay">Gopay</option>
+    </select>
+    
+    <label>Harga</label>
+    <input type="text" id="harga">
+    
+    <label>Nomor Premium</label>
+    <input type="text" id="nomorpremium">
+    
+    <div id="linkgrupField">
+      <label>Link Grup</label>
+      <input type="text" id="linkgrup">
     </div>
+    
+    <button onclick="generateResult()">Tampilkan Struktur</button>
+    
+    <div id="result" class="result" style="display:none">
+      <div id="captureArea">
+        <h3>Struktur Pembayaran</h3>
+        <p><strong>Nama Pembeli:</strong> <span id="r_nama"></span></p>
+        <p><strong>Nomor Pembeli:</strong> <span id="r_nomor"></span></p>
+        <p><strong>Produk:</strong> <span id="r_produk"></span></p>
+        <p><strong>Payment:</strong> <span id="r_payment"></span></p>
+        <p><strong>Harga:</strong> <span id="r_harga"></span></p>
+        <p><strong>Nomor Premium:</strong> <span id="r_nomorpremium"></span></p>
+        <p id="r_linkgroup_wrap"><strong>Link Grup:</strong> <span id="r_linkgrup"></span></p>
+      </div>
+      <button onclick="downloadAsImage()">Download Gambar</button>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script>
+    function toggleLinkGrup() {
+      const produk = document.getElementById('produk').value;
+      const linkgrupField = document.getElementById('linkgrupField');
+      linkgrupField.style.display = (produk === "Premium User") ? 'none' : 'block';
+    }
+
+    function generateResult() {
+      const nama = document.getElementById('nama').value;
+      const nomor = document.getElementById('nomor').value;
+      const produk = document.getElementById('produk').value;
+      const payment = document.getElementById('payment').value;
+      const harga = document.getElementById('harga').value;
+      const nomorpremium = document.getElementById('nomorpremium').value;
+      const linkgrup = document.getElementById('linkgrup').value;
+      
+      document.getElementById('r_nama').textContent = nama;
+      document.getElementById('r_nomor').textContent = nomor;
+      document.getElementById('r_produk').textContent = produk;
+      document.getElementById('r_payment').textContent = payment;
+      document.getElementById('r_harga').textContent = harga;
+      document.getElementById('r_nomorpremium').textContent = nomorpremium;
+      document.getElementById('r_linkgrup').textContent = linkgrup;
+      document.getElementById('r_linkgroup_wrap').style.display = (produk === "Premium User") ? 'none' : 'block';
+
+      document.getElementById('result').style.display = 'block';
+    }
+
+    function downloadAsImage() {
+      const captureElement = document.getElementById('captureArea');
+      html2canvas(captureElement).then(canvas => {
+        const link = document.createElement('a');
+        link.download = 'struktur-pembayaran.png';
+        link.href = canvas.toDataURL('image/png');
+        link.click();
+      });
+    }
+  </script>
 </body>
 </html>
