@@ -11,20 +11,32 @@
 
   <div class="container">
     <h2>Form Pembayaran</h2>
+    <input type="file" id="logo" accept="image/*" onchange="previewLogo()" />
     <input type="text" id="nama" placeholder="Nama" required>
-    <input type="text" id="produk" placeholder="Produk" required>
+    
+    <select id="produk" required>
+      <option value="Premium User">Premium User</option>
+      <option value="Sewabot Grup Basic">Sewabot Grup Basic</option>
+      <option value="Sewabot Grup Plus">Sewabot Grup Plus</option>
+      <option value="Sewabot Grup VVIP">Sewabot Grup VVIP</option>
+    </select>
+
     <input type="text" id="durasi" placeholder="Durasi" required>
+    
     <select id="pembayaran" required>
       <option value="Gopay">Gopay</option>
       <option value="QRIS">QRIS</option>
       <option value="DANA">DANA</option>
     </select>
+
     <input type="number" id="harga" placeholder="Harga" required>
     <input type="number" id="fee" placeholder="Fee" required>
+    
     <button onclick="generateStruk()">Tampilkan Struk</button>
     <button onclick="downloadStruk()">Download Gambar</button>
 
     <div class="struk" id="struk">
+      <img id="logoPreview" alt="Logo" style="max-width: 80px; max-height: 80px; margin-bottom: 10px;">
       <h3>STRUKTUR PEMBAYARAN</h3>
       <p><strong>Nama:</strong> <span id="outNama"></span></p>
       <p><strong>Produk:</strong> <span id="outProduk"></span></p>
@@ -40,6 +52,20 @@
   <script>
     function formatRupiah(number) {
       return 'Rp ' + parseInt(number).toLocaleString('id-ID');
+    }
+
+    function previewLogo() {
+      const logoInput = document.getElementById("logo");
+      const logoPreview = document.getElementById("logoPreview");
+      const file = logoInput.files[0];
+
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          logoPreview.src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+      }
     }
 
     function generateStruk() {
