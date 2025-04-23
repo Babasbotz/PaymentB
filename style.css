@@ -68,14 +68,6 @@ select, input[type="text"] {
   border-top: 2px dashed #aaa;
 }
 
-.footer {
-  text-align: center;
-  margin-top: 20px;
-  font-style: italic;
-  color: #888;
-  font-size: 14px;
-}
-
 button {
   display: block;
   width: 100%;
@@ -96,4 +88,12 @@ button:hover {
 
 button:active {
   background-color: #388e3c;
+}
+
+#result-container {
+  background-color: white;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
 }
