@@ -97,3 +97,11 @@ button:active {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   margin-top: 20px;
 }
+
+.footer {
+  text-align: center;
+  margin-top: 20px;
+  font-style: italic;
+  color: #888;
+  font-size: 14px;
+}
