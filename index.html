@@ -1,53 +1,51 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <title>Struktur Pembayaran Online</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Struktur Pembayaran Online</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="container">
-    <h2>Form Pembayaran</h2>
-
-    <input type="file" id="logo" accept="image/*" onchange="previewLogo()" />
-    <input type="text" id="nama" placeholder="Nama" required>
-
-    <select id="produk" required>
-      <option value="Premium User">Premium User</option>
-      <option value="Sewabot Grup Basic">Sewabot Grup Basic</option>
-      <option value="Sewabot Grup Plus">Sewabot Grup Plus</option>
-      <option value="Sewabot Grup VVIP">Sewabot Grup VVIP</option>
-    </select>
-
-    <input type="text" id="durasi" placeholder="Durasi" required>
-
-    <select id="pembayaran" required>
-      <option value="Gopay">Gopay</option>
-      <option value="QRIS">QRIS</option>
-      <option value="DANA">DANA</option>
-    </select>
-
-    <input type="number" id="harga" placeholder="Harga" required>
-    <input type="text" id="nomor" placeholder="Nomor Premium User" required>
-    <input type="text" id="link" placeholder="Link Grup" required>
-
-    <button onclick="generateStruk()">Tampilkan Struk</button>
-    <button onclick="downloadStruk()">Download Gambar</button>
-
-    <div class="struk" id="struk">
-      <img id="logoPreview" alt="Logo" style="max-width: 80px; max-height: 80px;">
-      <h3>STRUKTUR PEMBAYARAN</h3>
-      <div class="struk-item"><strong>Nama:</strong> <span id="outputNama"></span></div>
-      <div class="struk-item"><strong>Produk:</strong> <span id="outputProduk"></span></div>
-      <div class="struk-item"><strong>Durasi:</strong> <span id="outputDurasi"></span></div>
-      <div class="struk-item"><strong>Pembayaran:</strong> <span id="outputPembayaran"></span></div>
-      <div class="struk-item"><strong>Harga:</strong> <span id="outputHarga"></span></div>
-      <div class="struk-item"><strong>Nomor Premium:</strong> <span id="outputNomorPremium"></span></div>
-      <div class="struk-item"><strong>Link Grup:</strong> <span id="outputLinkGrup"></span></div>
-      <div class="thank-you">Terima Kasih Sudah Order Di Babas</div>
+    <div class="container">
+        <h1>Struktur Pembayaran Online</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Nama Pembeli</th>
+                    <th>Nomor Pembeli</th>
+                    <th>Produk</th>
+                    <th>Payment</th>
+                    <th>Harga</th>
+                    <th>Nomor Premium</th>
+                    <th>Link Grup</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><input type="text" placeholder="Nama Pembeli"></td>
+                    <td><input type="text" placeholder="Nomor Pembeli"></td>
+                    <td>
+                        <select>
+                            <option>Premium User</option>
+                            <option>Sewabot Grup Basic</option>
+                            <option>Sewabot Grup Plus</option>
+                            <option>Sewabot Grup VVIP</option>
+                        </select>
+                    </td>
+                    <td>
+                        <select>
+                            <option>Qris</option>
+                            <option>Dana</option>
+                            <option>Gopay</option>
+                        </select>
+                    </td>
+                    <td><input type="number" placeholder="Harga"></td>
+                    <td><input type="text" placeholder="Nomor Premium"></td>
+                    <td><input type="text" placeholder="Link Grup"></td>
+                </tr>
+            </tbody>
+        </table>
     </div>
-  </div>
-
-  <script src="script.js"></script>
 </body>
 </html>
