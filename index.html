@@ -19,6 +19,7 @@
       border-radius: 16px;
       padding: 20px;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      box-sizing: border-box;
     }
 
     h2 {
@@ -27,22 +28,26 @@
       margin-bottom: 20px;
     }
 
+    .form-group {
+      margin-bottom: 15px;
+    }
+
     label {
       font-weight: 500;
-      margin-top: 10px;
-      display: block;
       font-size: 14px;
       color: #333;
+      display: block;
+      margin-bottom: 5px;
     }
 
     input, select {
       width: 100%;
       padding: 10px;
       font-size: 15px;
-      margin-top: 6px;
       border-radius: 12px;
       border: 1px solid #ccc;
       background-color: #fafafa;
+      box-sizing: border-box;
     }
 
     button {
@@ -69,6 +74,7 @@
       background: #fefefe;
       border-radius: 12px;
       border: 1px solid #ddd;
+      box-sizing: border-box;
     }
 
     .result h3 {
@@ -79,6 +85,7 @@
     .result p {
       margin: 8px 0;
       font-size: 14px;
+      word-wrap: break-word;
     }
   </style>
 </head>
@@ -86,37 +93,49 @@
   <div class="container">
     <h2>Struktur Pembayaran</h2>
 
-    <label>Nama Pembeli</label>
-    <input type="text" id="nama">
+    <div class="form-group">
+      <label for="nama">Nama Pembeli</label>
+      <input type="text" id="nama">
+    </div>
 
-    <label>Nomor Pembeli</label>
-    <input type="text" id="nomor">
+    <div class="form-group">
+      <label for="nomor">Nomor Pembeli</label>
+      <input type="text" id="nomor">
+    </div>
 
-    <label>Produk</label>
-    <select id="produk" onchange="toggleLinkGrup()">
-      <option value="">Pilih Produk</option>
-      <option value="Premium User">Premium User</option>
-      <option value="Sewabot Grup Basic">Sewabot Grup Basic</option>
-      <option value="Sewabot Grup Plus">Sewabot Grup Plus</option>
-      <option value="Sewabot Grup VVIP">Sewabot Grup VVIP</option>
-    </select>
+    <div class="form-group">
+      <label for="produk">Produk</label>
+      <select id="produk" onchange="toggleLinkGrup()">
+        <option value="">Pilih Produk</option>
+        <option value="Premium User">Premium User</option>
+        <option value="Sewabot Grup Basic">Sewabot Grup Basic</option>
+        <option value="Sewabot Grup Plus">Sewabot Grup Plus</option>
+        <option value="Sewabot Grup VVIP">Sewabot Grup VVIP</option>
+      </select>
+    </div>
 
-    <label>Payment</label>
-    <select id="payment">
-      <option value="">Pilih Metode</option>
-      <option value="Qris">Qris</option>
-      <option value="Dana">Dana</option>
-      <option value="Gopay">Gopay</option>
-    </select>
+    <div class="form-group">
+      <label for="payment">Payment</label>
+      <select id="payment">
+        <option value="">Pilih Metode</option>
+        <option value="Qris">Qris</option>
+        <option value="Dana">Dana</option>
+        <option value="Gopay">Gopay</option>
+      </select>
+    </div>
 
-    <label>Harga</label>
-    <input type="text" id="harga">
+    <div class="form-group">
+      <label for="harga">Harga</label>
+      <input type="text" id="harga">
+    </div>
 
-    <label>Nomor Premium</label>
-    <input type="text" id="nomorpremium">
+    <div class="form-group">
+      <label for="nomorpremium">Nomor Premium</label>
+      <input type="text" id="nomorpremium">
+    </div>
 
-    <div id="linkgrupField">
-      <label>Link Grup</label>
+    <div class="form-group" id="linkgrupField">
+      <label for="linkgrup">Link Grup</label>
       <input type="text" id="linkgrup">
     </div>
 
