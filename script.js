@@ -1,39 +1,41 @@
-document.getElementById('show-button').addEventListener('click', function () {
-  // Ambil data dari form
-  let nama = document.getElementById('nama').value;
-  let produk = document.getElementById('produk').value;
-  let durasi = document.getElementById('durasi').value;
-  let harga = document.getElementById('harga').value;
-  let nomorPremium = document.getElementById('nomor-premium').value;
-  let linkGrup = document.getElementById('link-grup').value;
+function formatRupiah(number) {
+  return 'Rp ' + parseInt(number).toLocaleString('id-ID');
+}
 
-  // Tampilkan hasil di bawah form
-  let resultContainer = document.getElementById('result-container');
-  let result = document.getElementById('result');
-  
-  result.innerHTML = `
-    <p><strong>Nama:</strong> ${nama}</p>
-    <p><strong>Produk:</strong> ${produk}</p>
-    <p><strong>Durasi:</strong> ${durasi}</p>
-    <p><strong>Harga:</strong> ${harga}</p>
-    <p><strong>Nomor Premium:</strong> ${nomorPremium}</p>
-    <p><strong>Link Grup:</strong> <a href="${linkGrup}" target="_blank">${linkGrup}</a></p>
-  `;
+function previewLogo() {
+  const logoInput = document.getElementById("logo");
+  const logoPreview = document.getElementById("logoPreview");
+  const file = logoInput.files[0];
 
-  resultContainer.style.display = 'block'; // Menampilkan hasil
+  if (file) {
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      logoPreview.src = e.target.result;
+    };
+    reader.readAsDataURL(file);
+  }
+}
 
-  // Tampilkan tombol "Simpan sebagai Gambar"
-  document.getElementById('save-button').style.display = 'block';
-});
+function generateStruk() {
+  const harga = parseInt(document.getElementById('harga').value);
 
-document.getElementById('save-button').addEventListener('click', function () {
-  let resultContainer = document.getElementById('result-container');
-  
-  html2canvas(resultContainer).then(function (canvas) {
-    let imgData = canvas.toDataURL('image/png');
-    let link = document.createElement('a');
-    link.href = imgData;
-    link.download = 'struktur_pembayaran.png';
+  document.getElementById('outputNama').innerText = document.getElementById('nama').value;
+  document.getElementById('outputProduk').innerText = document.getElementById('produk').value;
+  document.getElementById('outputDurasi').innerText = document.getElementById('durasi').value;
+  document.getElementById('outputPembayaran').innerText = document.getElementById('pembayaran').value;
+  document.getElementById('outputHarga').innerText = formatRupiah(harga);
+  document.getElementById('outputNomorPremium').innerText = document.getElementById('nomor').value;
+  document.getElementById('outputLinkGrup').innerText = document.getElementById('link').value;
+
+  document.getElementById('struk').style.display = 'block';
+}
+
+function downloadStruk() {
+  const struk = document.getElementById("struk");
+  html2canvas(struk).then(canvas => {
+    const link = document.createElement('a');
+    link.download = 'struk.jpg';
+    link.href = canvas.toDataURL("image/jpeg");
     link.click();
   });
-});
+}
